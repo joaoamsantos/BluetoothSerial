@@ -203,10 +203,43 @@ public class BluetoothSerialService {
      * @see ConnectedThread#write(byte[])
      */
     public void write(byte[] out) {
-        int messageLength = message.length;
+        Bundle myBundle = new Bundle();
+        myBundle.putInt("message", 35);
+        myBundle.putInt("value1", 60);
+        myBundle.putInt("value2", 0);
+        Message myMessage = this.myHandler.obtainMessage();
+        myMessage.setData(myBundle);
+
+        int messageLength = myMessage.length;
         this.nxtOutputStream.write(messageLength);
         this.nxtOutputStream.write(messageLength >> 8);
         this.nxtOutputStream.write(out, 0, out.length);
+    }
+
+    //ADDED BY JMS - Functions that create a byte array that allows the motors to start
+
+   private void MotorForward() {
+        GetMotorPower();
+        if (CheckVHControlMode() == 1) {
+            sendBTCmessage(0, 35, this.MotorC_Power, 0);
+        } else {
+            sendBTCmessage(0, 30, this.MotorA_Power, 0);
+        }
+    }
+
+
+    void sendBTCmessage(int delay, int message, int value1, int value2) {
+        Bundle myBundle = new Bundle();
+        myBundle.putInt("message", message);
+        myBundle.putInt("value1", value1);
+        myBundle.putInt("value2", value2);
+        Message myMessage = mHandler.obtainMessage();
+        myMessage.setData(myBundle);
+        if (delay == 0) {
+            this.btcHandler.sendMessage(myMessage);
+        } else {
+            this.btcHandler.sendMessageDelayed(myMessage, (long) delay);
+        }
     }
 
     /**
