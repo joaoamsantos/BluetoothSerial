@@ -40,7 +40,7 @@ public class BluetoothSerialService {
 
     // Well known SPP UUID
     private static final UUID UUID_SPP = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-
+ 
     // Member fields
     private final BluetoothAdapter mAdapter;
     private final Handler mHandler;
@@ -49,6 +49,10 @@ public class BluetoothSerialService {
     private ConnectThread mConnectThread;
     private ConnectedThread mConnectedThread;
     private int mState;
+
+    //ADDED BY JMS
+    private OutputStream nxtOutputStream = null;
+    private static final UUID SERIAL_PORT_SERVICE_CLASS_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     // Constants that indicate the current connection state
     public static final int STATE_NONE = 0;       // we're doing nothing
