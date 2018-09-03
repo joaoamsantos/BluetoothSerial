@@ -101,19 +101,6 @@ public class BluetoothSerialService {
         if (mConnectedThread != null) {mConnectedThread.cancel(); mConnectedThread = null;}
 
         setState(STATE_NONE);
-
-//      Listen isn't working with Arduino. Ignore since assuming the phone will initiate the connection.
-//        setState(STATE_LISTEN);
-//
-//        // Start the thread to listen on a BluetoothServerSocket
-//        if (mSecureAcceptThread == null) {
-//            mSecureAcceptThread = new AcceptThread(true);
-//            mSecureAcceptThread.start();
-//        }
-//        if (mInsecureAcceptThread == null) {
-//            mInsecureAcceptThread = new AcceptThread(false);
-//            mInsecureAcceptThread.start();
-//        }
     }
 
     /**
@@ -173,6 +160,12 @@ public class BluetoothSerialService {
         msg.setData(bundle);
         mHandler.sendMessage(msg);
 
+        //ADDED BY JMS
+        BluetoothSocket nxtBTSocketTemporary = device.createRfcommSocketToServiceRecord(SERIAL_PORT_SERVICE_CLASS_UUID);
+        nxtBTSocketTemporary.connect();
+        socket = nxtBTSocketTemporary;
+        this.nxtOutputStream = socket.getOutputStream();
+        
         setState(STATE_CONNECTED);
     }
 
@@ -210,15 +203,10 @@ public class BluetoothSerialService {
      * @see ConnectedThread#write(byte[])
      */
     public void write(byte[] out) {
-        // Create temporary object
-        ConnectedThread r;
-        // Synchronize a copy of the ConnectedThread
-        synchronized (this) {
-            if (mState != STATE_CONNECTED) return;
-            r = mConnectedThread;
-        }
-        // Perform the write unsynchronized
-        r.write(out);
+        int messageLength = message.length;
+        this.nxtOutputStream.write(messageLength);
+        this.nxtOutputStream.write(messageLength >> 8);
+        this.nxtOutputStream.write(out, 0, out.length);
     }
 
     /**
@@ -473,22 +461,6 @@ public class BluetoothSerialService {
                     BluetoothSerialService.this.start();
                     break;
                 }
-            }
-        }
-
-        /**
-         * Write to the connected OutStream.
-         * @param buffer  The bytes to write
-         */
-        public void write(byte[] buffer) {
-            try {
-                mmOutStream.write(buffer);
-
-                // Share the sent message back to the UI Activity
-                mHandler.obtainMessage(BluetoothSerial.MESSAGE_WRITE, -1, -1, buffer).sendToTarget();
-
-            } catch (IOException e) {
-                Log.e(TAG, "Exception during write", e);
             }
         }
 
