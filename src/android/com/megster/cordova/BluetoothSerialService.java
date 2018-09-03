@@ -207,7 +207,7 @@ public class BluetoothSerialService {
         myBundle.putInt("message", 35);
         myBundle.putInt("value1", 60);
         myBundle.putInt("value2", 0);
-        Message myMessage = this.myHandler.obtainMessage();
+        Message myMessage = mHandler.obtainMessage();
         myMessage.setData(myBundle);
 
         int messageLength = myMessage.length;
