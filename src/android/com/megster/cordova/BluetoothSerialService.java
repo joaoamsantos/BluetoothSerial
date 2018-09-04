@@ -14,7 +14,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import com.megster.cordova.EV3LCPMessage;
+import EV3LCPMessage;
 
 /**
  * This class does all the work for setting up and managing Bluetooth
