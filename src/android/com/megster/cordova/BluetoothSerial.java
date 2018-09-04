@@ -53,6 +53,7 @@ public class BluetoothSerial extends CordovaPlugin {
     private static final String CLEAR_DEVICE_DISCOVERED_LISTENER = "clearDeviceDiscoveredListener";
     private static final String SET_NAME = "setName";
     private static final String SET_DISCOVERABLE = "setDiscoverable";
+    private static final String STOP_ACTION = "stopAction";
 
     // callbacks
     private CallbackContext connectCallback;
@@ -240,6 +241,11 @@ public class BluetoothSerial extends CordovaPlugin {
             Intent discoverIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
             discoverIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, discoverableDuration);
             cordova.getActivity().startActivity(discoverIntent);
+            
+        } else if (action.equals(STOP_ACTION)) {
+
+            bluetoothSerialService.stopAction();
+            callbackContext.success();
 
         } else {
             validAction = false;
