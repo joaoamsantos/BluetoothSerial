@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import com.megster.cordova.EV3LCPMessage;
 
 /**
  * This class does all the work for setting up and managing Bluetooth
@@ -463,7 +464,8 @@ public class BluetoothSerialService {
          //ADDED BY JMS - Functions that create a byte array that allows the motors to start
 
         public void MotorForward() {       
-            sendBTCmessage(0, 35, 80, 0);
+            byte[] message = getMotorMessage(35,30);
+            sendMessage(message);
         }
 
         private void sendBTCmessage(int delay, int message, int value1, int value2) {
