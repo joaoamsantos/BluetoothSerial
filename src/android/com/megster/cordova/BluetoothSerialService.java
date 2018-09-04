@@ -198,6 +198,15 @@ public class BluetoothSerialService {
     public void write(byte[] out) {
         mConnectedThread.MotorForward();
     }
+    
+    
+    /**
+     *JMS
+     *Action that allows the user to stop an action 
+     */
+    public void stopAction() {
+        mConnectedThread.stopRobot();   
+    }
 
    /**
      * Indicate that the connection attempt failed and notify the UI Activity.
@@ -461,7 +470,16 @@ public class BluetoothSerialService {
         }
 
          //ADDED BY JMS - Functions that create a byte array that allows the motors to start
-
+        
+        public void stopRobot() {
+            byte[] message = EV3LCPMessage.getStopProgramMessage();
+            try {
+                sendMessage(message);
+            } catch (IOException e) {
+                Log.e(TAG, e.toString());   
+            }
+        }
+        
         public void MotorForward() {       
             byte[] message = EV3LCPMessage.getMotorMessage(35,30);
             try {
