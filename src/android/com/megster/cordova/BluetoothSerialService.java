@@ -203,28 +203,13 @@ public class BluetoothSerialService {
      * @see ConnectedThread#write(byte[])
      */
     public void write(byte[] out) {
-        Bundle myBundle = new Bundle();
-        myBundle.putInt("message", 35);
-        myBundle.putInt("value1", 60);
-        myBundle.putInt("value2", 0);
-        Message myMessage = mHandler.obtainMessage();
-        myMessage.setData(myBundle);
-
-        int messageLength = myMessage.length;
-        this.nxtOutputStream.write(messageLength);
-        this.nxtOutputStream.write(messageLength >> 8);
-        this.nxtOutputStream.write(out, 0, out.length);
+        MotorForward();
     }
 
     //ADDED BY JMS - Functions that create a byte array that allows the motors to start
 
-   private void MotorForward() {
-        GetMotorPower();
-        if (CheckVHControlMode() == 1) {
-            sendBTCmessage(0, 35, this.MotorC_Power, 0);
-        } else {
-            sendBTCmessage(0, 30, this.MotorA_Power, 0);
-        }
+   private void MotorForward() {       
+        sendBTCmessage(0, 35, 80, 0);
     }
 
 
@@ -236,10 +221,20 @@ public class BluetoothSerialService {
         Message myMessage = this.mHandler.obtainMessage();
         myMessage.setData(myBundle);
         if (delay == 0) {
-            this.btcHandler.sendMessage(myMessage);
+            this.mHandler.sendMessage(myMessage);
         } else {
-            this.btcHandler.sendMessageDelayed(myMessage, (long) delay);
+            this.mHandler.sendMessageDelayed(myMessage, (long) delay);
         }
+    }
+
+    public void sendMessage(byte[] message) throws IOException {
+        if (this.nxtOutputStream == null) {
+            throw new IOException();
+        }
+        int messageLength = message.length;
+        this.nxtOutputStream.write(messageLength);
+        this.nxtOutputStream.write(messageLength >> 8);
+        this.nxtOutputStream.write(message, 0, message.length);
     }
 
     /**
