@@ -41,6 +41,8 @@ public class EV3LCPMessage {
     public static byte In3 = (byte) 2;
     public static byte In4 = (byte) 3;
     public static byte Info = (byte) 124;
+    public static final byte LIST_FILES = (byte) -103;
+    public static final byte LIST_OPEN_HANDLES = (byte) -99;
     public static byte InitBytes = (byte) 47;
     public static byte Initializing = (byte) 125;
     public static byte InputDevice = LIST_FILES;
@@ -52,8 +54,6 @@ public class EV3LCPMessage {
     public static byte InputSample = CONTINUE_GETFILE;
     public static byte InputTest = CREATE_DIR;
     public static byte InputWrite = BLUETOOTHPIN;
-    public static final byte LIST_FILES = (byte) -103;
-    public static final byte LIST_OPEN_HANDLES = (byte) -99;
     public static final byte LMotor = (byte) 7;
     public static byte Large = (byte) 2;
     public static final byte MMotor = (byte) 8;
