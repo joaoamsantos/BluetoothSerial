@@ -1,4 +1,4 @@
-package com.example.shengivictor.nxtbtdevicelist;
+package com.megster.cordova;
 
 public class EV3LCPMessage {
     public static byte Array = (byte) -63;
