@@ -233,7 +233,7 @@ public class BluetoothSerialService {
         myBundle.putInt("message", message);
         myBundle.putInt("value1", value1);
         myBundle.putInt("value2", value2);
-        Message myMessage = mHandler.obtainMessage();
+        Message myMessage = this.mHandler.obtainMessage();
         myMessage.setData(myBundle);
         if (delay == 0) {
             this.btcHandler.sendMessage(myMessage);
