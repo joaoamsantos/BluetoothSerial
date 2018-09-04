@@ -464,7 +464,7 @@ public class BluetoothSerialService {
          //ADDED BY JMS - Functions that create a byte array that allows the motors to start
 
         public void MotorForward() {       
-            byte[] message = getMotorMessage(35,30);
+            byte[] message = EV3LCPMessage.getMotorMessage(35,30);
             sendMessage(message);
         }
 
