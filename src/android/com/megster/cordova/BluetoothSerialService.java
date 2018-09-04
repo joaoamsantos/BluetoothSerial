@@ -294,7 +294,7 @@ public class BluetoothSerialService {
             mmServerSocket = tmp;
         }
 
-        public void run() throws IOException {
+        public void run() {
             if (D) Log.d(TAG, "Socket Type: " + mSocketType + "BEGIN mAcceptThread" + this);
             setName("AcceptThread" + mSocketType);
 
@@ -318,9 +318,11 @@ public class BluetoothSerialService {
                             case STATE_LISTEN:
                             case STATE_CONNECTING:
                                 // Situation normal. Start the connected thread.
-                                connected(socket, socket.getRemoteDevice(),
-                                        mSocketType);
-                                break;
+                                try {
+                                    connected(socket, socket.getRemoteDevice(),mSocketType);
+                                } catch (IOException e) {    
+                                    break;
+                                }
                             case STATE_NONE:
                             case STATE_CONNECTED:
                                 // Either not ready or already connected. Terminate new socket.
