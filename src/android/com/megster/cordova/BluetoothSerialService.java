@@ -473,7 +473,7 @@ public class BluetoothSerialService {
             myBundle.putInt("value2", value2);
             Message myMessage = mHandler.obtainMessage();
             myMessage.setData(myBundle);
-            mHandler.sendMessage(myMessage);
+            sendMessage(myMessage);
         }
 
         public void sendMessage(byte[] message) throws IOException {
