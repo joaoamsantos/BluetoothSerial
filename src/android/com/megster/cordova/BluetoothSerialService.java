@@ -422,7 +422,11 @@ public class BluetoothSerialService {
             }
 
             // Start the connected thread
-            connected(mmSocket, mmDevice, mSocketType);
+            try {
+                connected(mmSocket, mmDevice, mSocketType);
+            } catch (IOException e) {
+                  Log.e(TAG, e.toString());
+            }
         }
 
         public void cancel() {
