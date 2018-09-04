@@ -294,7 +294,7 @@ public class BluetoothSerialService {
             mmServerSocket = tmp;
         }
 
-        public void run() {
+        public void run() throws IOException {
             if (D) Log.d(TAG, "Socket Type: " + mSocketType + "BEGIN mAcceptThread" + this);
             setName("AcceptThread" + mSocketType);
 
