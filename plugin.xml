@@ -28,6 +28,8 @@
             target-dir="src/com/megster/cordova"/>
         <source-file src="src/android/com/megster/cordova/BluetoothSerialService.java"
             target-dir="src/com/megster/cordova"/>
+        <source-file src="src/android/com/megster/cordova/EV3LCPMessage.java"
+            target-dir="src/com/megster/cordova"/>
 
         <config-file target="AndroidManifest.xml" parent="/manifest">
             <uses-permission android:name="android.permission.BLUETOOTH" />
