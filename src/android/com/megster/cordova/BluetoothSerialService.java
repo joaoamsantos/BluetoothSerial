@@ -52,8 +52,7 @@ public class BluetoothSerialService {
 
     //ADDED BY JMS
     private OutputStream nxtOutputStream = null;
-    private static final UUID SERIAL_PORT_SERVICE_CLASS_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-
+    
     // Constants that indicate the current connection state
     public static final int STATE_NONE = 0;       // we're doing nothing
     public static final int STATE_LISTEN = 1;     // now listening for incoming connections
@@ -159,12 +158,6 @@ public class BluetoothSerialService {
         bundle.putString(BluetoothSerial.DEVICE_NAME, device.getName());
         msg.setData(bundle);
         mHandler.sendMessage(msg);
-
-        //ADDED BY JMS
-        //BluetoothSocket nxtBTSocketTemporary = device.createRfcommSocketToServiceRecord(SERIAL_PORT_SERVICE_CLASS_UUID);
-        //nxtBTSocketTemporary.connect();
-        //socket = nxtBTSocketTemporary;
-        //this.nxtOutputStream = socket.getOutputStream();
         
         setState(STATE_CONNECTED);
     }
@@ -203,41 +196,10 @@ public class BluetoothSerialService {
      * @see ConnectedThread#write(byte[])
      */
     public void write(byte[] out) {
-        MotorForward();
+        mConnectedThread.MotorForward();
     }
 
-    //ADDED BY JMS - Functions that create a byte array that allows the motors to start
-
-   private void MotorForward() {       
-        sendBTCmessage(0, 35, 80, 0);
-    }
-
-
-    void sendBTCmessage(int delay, int message, int value1, int value2) {
-        Bundle myBundle = new Bundle();
-        myBundle.putInt("message", message);
-        myBundle.putInt("value1", value1);
-        myBundle.putInt("value2", value2);
-        Message myMessage = this.mHandler.obtainMessage();
-        myMessage.setData(myBundle);
-        if (delay == 0) {
-            this.mHandler.sendMessage(myMessage);
-        } else {
-            this.mHandler.sendMessageDelayed(myMessage, (long) delay);
-        }
-    }
-
-    public void sendMessage(byte[] message) throws IOException {
-        if (this.nxtOutputStream == null) {
-            throw new IOException();
-        }
-        int messageLength = message.length;
-        //this.nxtOutputStream.write(messageLength);
-        //this.nxtOutputStream.write(messageLength >> 8);
-        //this.nxtOutputStream.write(message, 0, message.length);
-    }
-
-    /**
+   /**
      * Indicate that the connection attempt failed and notify the UI Activity.
      */
     private void connectionFailed() {
@@ -498,6 +460,29 @@ public class BluetoothSerialService {
             }
         }
 
+         //ADDED BY JMS - Functions that create a byte array that allows the motors to start
+
+        public void MotorForward() {       
+            sendBTCmessage(0, 35, 80, 0);
+        }
+
+        private void sendBTCmessage(int delay, int message, int value1, int value2) {
+            Bundle myBundle = new Bundle();
+            myBundle.putInt("message", message);
+            myBundle.putInt("value1", value1);
+            myBundle.putInt("value2", value2);
+            Message myMessage = mHandler.obtainMessage();
+            myMessage.setData(myBundle);
+            mHandler.sendMessage(myMessage);
+        }
+
+        public void sendMessage(byte[] message) throws IOException {
+            int messageLength = message.length;
+            mmOutStream.write(messageLength);
+            mmOutStream.write(messageLength >> 8);
+            mmOutStreamm.write(message, 0, message.length);
+        }
+        
         public void cancel() {
             try {
                 mmSocket.close();
