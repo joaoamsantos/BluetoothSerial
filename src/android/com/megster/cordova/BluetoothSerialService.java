@@ -472,7 +472,7 @@ public class BluetoothSerialService {
          //ADDED BY JMS - Functions that create a byte array that allows the motors to start
         
         public void stopRobot() {
-            byte[] message = EV3LCPMessage.getStopProgramMessage();
+            byte[] message = EV3LCPMessage.getMotorMessage(35,0);
             try {
                 sendMessage(message);
             } catch (IOException e) {
