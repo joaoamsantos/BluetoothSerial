@@ -161,10 +161,10 @@ public class BluetoothSerialService {
         mHandler.sendMessage(msg);
 
         //ADDED BY JMS
-        BluetoothSocket nxtBTSocketTemporary = device.createRfcommSocketToServiceRecord(SERIAL_PORT_SERVICE_CLASS_UUID);
-        nxtBTSocketTemporary.connect();
-        socket = nxtBTSocketTemporary;
-        this.nxtOutputStream = socket.getOutputStream();
+        //BluetoothSocket nxtBTSocketTemporary = device.createRfcommSocketToServiceRecord(SERIAL_PORT_SERVICE_CLASS_UUID);
+        //nxtBTSocketTemporary.connect();
+        //socket = nxtBTSocketTemporary;
+        //this.nxtOutputStream = socket.getOutputStream();
         
         setState(STATE_CONNECTED);
     }
