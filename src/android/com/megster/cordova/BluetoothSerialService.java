@@ -464,7 +464,11 @@ public class BluetoothSerialService {
 
         public void MotorForward() {       
             byte[] message = EV3LCPMessage.getMotorMessage(35,30);
-            sendMessage(message);
+            try {
+                sendMessage(message);
+            } catch (IOException e) {
+                Log.e(TAG, e.toString());   
+            }
         }
 
         private void sendBTCmessage(int delay, int message, int value1, int value2) {
