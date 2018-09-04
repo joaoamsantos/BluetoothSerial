@@ -232,9 +232,9 @@ public class BluetoothSerialService {
             throw new IOException();
         }
         int messageLength = message.length;
-        this.nxtOutputStream.write(messageLength);
-        this.nxtOutputStream.write(messageLength >> 8);
-        this.nxtOutputStream.write(message, 0, message.length);
+        //this.nxtOutputStream.write(messageLength);
+        //this.nxtOutputStream.write(messageLength >> 8);
+        //this.nxtOutputStream.write(message, 0, message.length);
     }
 
     /**
