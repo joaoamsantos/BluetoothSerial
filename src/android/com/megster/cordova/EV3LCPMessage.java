@@ -48,6 +48,7 @@ public class EV3LCPMessage {
     public static byte InputDevice = LIST_FILES;
     public static byte InputDeviceList = CLOSE_FILEHANDLE;
     public static byte InputRead = CONTINUE_LIST_FILES;
+    public static final byte WRITEMAILBOX = (byte) -98;
     public static byte InputReadExt = WRITEMAILBOX;
     public static byte InputReadSI = LIST_OPEN_HANDLES;
     public static byte InputReady = DELETE_FILE;
@@ -141,7 +142,6 @@ public class EV3LCPMessage {
     public static byte UIWrite = (byte) -126;
     public static final byte Ultrasonic = (byte) 30;
     public static byte Unknown = (byte) -1;
-    public static final byte WRITEMAILBOX = (byte) -98;
     public static byte WrongPort = Byte.MAX_VALUE;
 
     public static byte[] getBeepMessage(int frequency, int duration) {
