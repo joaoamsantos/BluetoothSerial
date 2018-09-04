@@ -480,7 +480,7 @@ public class BluetoothSerialService {
             int messageLength = message.length;
             mmOutStream.write(messageLength);
             mmOutStream.write(messageLength >> 8);
-            mmOutStreamm.write(message, 0, message.length);
+            mmOutStream.write(message, 0, message.length);
         }
         
         public void cancel() {
