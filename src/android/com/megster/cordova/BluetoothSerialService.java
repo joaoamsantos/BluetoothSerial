@@ -498,16 +498,16 @@ public class BluetoothSerialService {
          //ADDED BY JMS - Functions that create a byte array that allows the motors to start
         
         public void turnLeftRobot() {
-            byte[] messageMotorB;
+           byte[] messageMotorB;
             byte[] messageMotorC;
-            if(motorCSpeed == -1 && motorBSpeed == 40){
+            if(motorCSpeed == 10 && motorBSpeed == 10){
                 return;    
             }
             else{
-                messageMotorB = EV3LCPMessage.getMotorMessage(31,40);
-                messageMotorC = EV3LCPMessage.getMotorMessage(32,-1);
-                motorCSpeed = -1;
-                motorBSpeed = 40;
+                messageMotorB = EV3LCPMessage.getMotorMessage(31,10);
+                messageMotorC = EV3LCPMessage.getMotorMessage(32,10);
+                motorCSpeed = 10;
+                motorBSpeed = 10;
             }
             try {
                 sendMessage(messageMotorB);
@@ -520,14 +520,14 @@ public class BluetoothSerialService {
         public void turnRightRobot() {
            byte[] messageMotorB;
             byte[] messageMotorC;
-            if(motorCSpeed == 40 && motorBSpeed == -1){
+            if(motorCSpeed == 70 && motorBSpeed == 70){
                 return;    
             }
             else{
-                messageMotorB = EV3LCPMessage.getMotorMessage(31,-1);
-                messageMotorC = EV3LCPMessage.getMotorMessage(32,40);
-                motorCSpeed = 40;
-                motorBSpeed = -1;
+                messageMotorB = EV3LCPMessage.getMotorMessage(31,70);
+                messageMotorC = EV3LCPMessage.getMotorMessage(32,70);
+                motorCSpeed = 70;
+                motorBSpeed = 70;
             }
             try {
                 sendMessage(messageMotorB);
