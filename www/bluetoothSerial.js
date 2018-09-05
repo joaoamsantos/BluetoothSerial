@@ -145,6 +145,10 @@ module.exports = {
     
     moveBackward :function (success, failure) {
         cordova.exec(success, failure, "BluetoothSerial", "moveBackward");
+    },
+    
+    move :function (code,success, failure) {
+        cordova.exec(success, failure, "BluetoothSerial", "move", [code]);
     }
 };
 
