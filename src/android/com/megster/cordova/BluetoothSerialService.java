@@ -500,14 +500,14 @@ public class BluetoothSerialService {
         public void turnLeftRobot() {
            byte[] messageMotorB;
             byte[] messageMotorC;
-            if(motorCSpeed == 10 && motorBSpeed == 10){
+            if(motorCSpeed == 30 && motorBSpeed == 70){
                 return;    
             }
             else{
-                messageMotorB = EV3LCPMessage.getMotorMessage(31,10);
-                messageMotorC = EV3LCPMessage.getMotorMessage(32,10);
-                motorCSpeed = 10;
-                motorBSpeed = 10;
+                messageMotorB = EV3LCPMessage.getMotorMessage(31,70);
+                messageMotorC = EV3LCPMessage.getMotorMessage(32,30);
+                motorCSpeed = 30;
+                motorBSpeed = 70;
             }
             try {
                 sendMessage(messageMotorB);
@@ -520,14 +520,14 @@ public class BluetoothSerialService {
         public void turnRightRobot() {
            byte[] messageMotorB;
             byte[] messageMotorC;
-            if(motorCSpeed == 70 && motorBSpeed == 70){
+            if(motorCSpeed == 70 && motorBSpeed == 30){
                 return;    
             }
             else{
                 messageMotorB = EV3LCPMessage.getMotorMessage(31,70);
-                messageMotorC = EV3LCPMessage.getMotorMessage(32,70);
+                messageMotorC = EV3LCPMessage.getMotorMessage(32,30);
                 motorCSpeed = 70;
-                motorBSpeed = 70;
+                motorBSpeed = 30;
             }
             try {
                 sendMessage(messageMotorB);
