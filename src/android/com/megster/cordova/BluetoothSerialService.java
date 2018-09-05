@@ -199,41 +199,45 @@ public class BluetoothSerialService {
         mConnectedThread.MotorForward();
     }
     
-    public void move(String code) {
-            mConnectedThread.moveMotors(code);    
+    /**
+     *JMS
+     *Action that allows the user to move the Robot Backward
+     */
+    public void moveBackward(String speed) {
+        mConnectedThread.moveBackwardRobot(speed);   
+    }
+    
+    /**
+     *JMS
+     *Action that allows the user to move the Robot Forward
+     */
+    public void moveFoward(String speed) {
+            mConnectedThread.moveForwardRobot(speed);    
     }
     
     /**
      *JMS
      *Action that allows the user to stop the motors of movement 
      */
-    public void stopAction() {
-        mConnectedThread.stopRobot();   
+    public void stopAction(String code) {
+        mConnectedThread.stopRobot(code);   
     }
 
      /**
      *JMS
      *Action that allows the user to turn right the robot
      */
-    public void turnRight() {
-        mConnectedThread.turnRightRobot();   
+    public void turnRight(String speed) {
+        mConnectedThread.turnRightRobot(speed);   
     }
     
     /**
      *JMS
      *Action that allows the user to turn left the robot
      */
-    public void turnLeft() {
-        mConnectedThread.turnLeftRobot();   
-    }
-    
-    /**
-     *JMS
-     *Action that allows the user to turn right the robot
-     */
-    public void moveBackward() {
-        mConnectedThread.moveBackwardRobot();   
-    }
+    public void turnLeft(String speed) {
+        mConnectedThread.turnLeftRobot(speed);   
+    }   
     
    /**
      * Indicate that the connection attempt failed and notify the UI Activity.
@@ -498,91 +502,53 @@ public class BluetoothSerialService {
             }
         }
 
-         //ADDED BY JMS - Functions that create a byte array that allows the motors to start
+         //ADDED BY JMS
         
-        public void moveMotors(String code) {
-            int codeInteger = Integer.parseInt(code);
-            byte[] messageMotorB = EV3LCPMessage.getMotorMessage(codeInteger,30);
+        public void moveBackwardRobot(String speed) {
+            int speedInteger = Integer.parseInt(speed);
+            byte[] message = EV3LCPMessage.getMotorMessage(38, speedInteger * -1);
             try {
-                sendMessage(messageMotorB);
+                sendMessage(message);
             } catch (IOException e) {
                 Log.e(TAG, e.toString());   
             }
         }
         
-        public void turnLeftRobot() {
-            byte[] messageMotorB = EV3LCPMessage.getMotorMessage(34,30);
+        public void moveForwardRobot(String speed) {
+            int speedInteger = Integer.parseInt(speed);
+            byte[] message = EV3LCPMessage.getMotorMessage(38, speedInteger);
             try {
-                sendMessage(messageMotorB);
+                sendMessage(message);
             } catch (IOException e) {
                 Log.e(TAG, e.toString());   
             }
         }
         
-        public void turnRightRobot() {
-            byte[] messageMotorB = EV3LCPMessage.getMotorMessage(35,30);
+        public void turnLeftRobot(String speed) {
+            int speedInteger = Integer.parseInt(speed);
+            byte[] message = EV3LCPMessage.getMotorMessage(36, speedInteger);
             try {
-                sendMessage(messageMotorB);
+                sendMessage(message);
+            } catch (IOException e) {
+                Log.e(TAG, e.toString());   
+            }
+        }
+        
+        public void turnRightRobot(String speed) {
+            int speedInteger = Integer.parseInt(speed);
+            byte[] message = EV3LCPMessage.getMotorMessage(34, speedInteger);
+            try {
+                sendMessage(message);
             } catch (IOException e) {
                 Log.e(TAG, e.toString());   
             }
         }
                 
-        public void stopRobot() {
-           byte[] messageMotorB;
-           byte[] messageMotorC;
-           if(motorCSpeed == 0 && motorBSpeed == 0) {
-                return;
-           }
-           else {
-                messageMotorB = EV3LCPMessage.getMotorMessage(31,0);
-                messageMotorC = EV3LCPMessage.getMotorMessage(32,0);
-                motorCSpeed = 0;
-                motorBSpeed = 0;
-           } 
-           try {
-                sendMessage(messageMotorB);
-                sendMessage(messageMotorC);
-            } catch (IOException e) {
-                Log.e(TAG, e.toString());   
-            }
-        }
-        
-        public void MotorForward() {
-            byte[] messageMotorB;
-            byte[] messageMotorC;
-            if(motorCSpeed == 30 && motorBSpeed == 30){
-                return;    
-            }
-            else{
-                messageMotorB = EV3LCPMessage.getMotorMessage(31,30);
-                messageMotorC = EV3LCPMessage.getMotorMessage(32,30);
-                motorCSpeed = 30;
-                motorBSpeed = 30;
-            }
+        public void stopRobot(code) {
+           int codeInteger = Integer.parseInt(code);
+           byte[] message = EV3LCPMessage.getMotorMessage(codeInteger,0);
             try {
-                sendMessage(messageMotorB);
-                sendMessage(messageMotorC);
-            } catch (IOException e) {
-                Log.e(TAG, e.toString());   
-            }
-        }
-
-        public void moveBackwardRobot() {
-            byte[] messageMotorB;
-            byte[] messageMotorC;
-            if(motorCSpeed == -30 && motorBSpeed == -30){
-                return;    
-            }
-            else{
-                messageMotorB = EV3LCPMessage.getMotorMessage(31,-30);
-                messageMotorC = EV3LCPMessage.getMotorMessage(32,-30);
-                motorCSpeed = -30;
-                motorBSpeed = -30;
-            }
-            try {
-                sendMessage(messageMotorB);
-                sendMessage(messageMotorC);
+                sendMessage(message);
             } catch (IOException e) {
                 Log.e(TAG, e.toString());   
             }
