@@ -269,7 +269,7 @@ public class BluetoothSerial extends CordovaPlugin {
         
         else if (action.equals(MOVE)) {
             
-            int code = args.getInteger(0) 
+            int code = args.getInteger(0);
             bluetoothSerialService.move(code);
             callbackContext.success();
         }
