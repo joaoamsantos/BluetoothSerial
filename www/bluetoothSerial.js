@@ -135,20 +135,20 @@ module.exports = {
         cordova.exec(success, failure, "BluetoothSerial", "stopAction");
     },
     
-    turnLeft: function (success, failure) {
-        cordova.exec(success, failure, "BluetoothSerial", "turnLeft");
+    turnLeft: function (speed, success, failure) {
+        cordova.exec(success, failure, "BluetoothSerial", "turnLeft", [speed]);
     },
     
-    turnRight: function (success, failure) {
-        cordova.exec(success, failure, "BluetoothSerial", "turnRight");
+    turnRight: function (speed ,success, failure) {
+        cordova.exec(success, failure, "BluetoothSerial", "turnRight", [speed]);
     },
     
-    moveBackward :function (success, failure) {
-        cordova.exec(success, failure, "BluetoothSerial", "moveBackward");
+    moveBackward :function (speed,success, failure) {
+        cordova.exec(success, failure, "BluetoothSerial", "moveBackward", [speed]);
     },
     
-    move :function (code,success, failure) {
-        cordova.exec(success, failure, "BluetoothSerial", "move", [code]);
+    moveForward :function (speed,success, failure) {
+        cordova.exec(success, failure, "BluetoothSerial", "moveBackward", [speed]);
     }
 };
 
