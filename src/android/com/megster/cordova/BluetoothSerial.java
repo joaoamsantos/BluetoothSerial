@@ -269,7 +269,8 @@ public class BluetoothSerial extends CordovaPlugin {
         
         else if (action.equals(MOVE)) {
             
-            bluetoothSerialService.move(args);
+            String code = args.getString(0);
+            bluetoothSerialService.move(code);
             callbackContext.success();
         }
     
