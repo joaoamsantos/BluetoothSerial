@@ -503,6 +503,7 @@ public class BluetoothSerialService {
             }
             try {
                 sendMessage(messageMotorLeft);
+                sendMessage(messageMotorRight);
             } catch (IOException e) {
                 Log.e(TAG, e.toString());   
             }
@@ -522,6 +523,7 @@ public class BluetoothSerialService {
             }
             try {
                 sendMessage(messageMotorRight);
+                sendMessage(messageMotorLeft);
             } catch (IOException e) {
                 Log.e(TAG, e.toString());   
             }
