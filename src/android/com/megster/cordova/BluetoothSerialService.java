@@ -196,7 +196,7 @@ public class BluetoothSerialService {
      * @see ConnectedThread#write(byte[])
      */
     public void write(byte[] out) {
-        mConnectedThread.MotorForward();
+        
     }
     
     /**
@@ -211,7 +211,7 @@ public class BluetoothSerialService {
      *JMS
      *Action that allows the user to move the Robot Forward
      */
-    public void moveFoward(String speed) {
+    public void moveForward(String speed) {
             mConnectedThread.moveForwardRobot(speed);    
     }
     
