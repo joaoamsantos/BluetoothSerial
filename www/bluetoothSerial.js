@@ -131,8 +131,8 @@ module.exports = {
         cordova.exec(null, null, "BluetoothSerial", "setDiscoverable", [discoverableDuration]);
     },
      
-    stopAction: function (success, failure) {
-        cordova.exec(success, failure, "BluetoothSerial", "stopAction");
+    stopAction: function (code,success, failure) {
+        cordova.exec(success, failure, "BluetoothSerial", "stopAction", [code]);
     },
     
     turnLeft: function (speed, success, failure) {
@@ -148,7 +148,7 @@ module.exports = {
     },
     
     moveForward :function (speed,success, failure) {
-        cordova.exec(success, failure, "BluetoothSerial", "moveBackward", [speed]);
+        cordova.exec(success, failure, "BluetoothSerial", "moveForward", [speed]);
     }
 };
 
