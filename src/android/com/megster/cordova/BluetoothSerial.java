@@ -55,7 +55,7 @@ public class BluetoothSerial extends CordovaPlugin {
     private static final String SET_DISCOVERABLE = "setDiscoverable";
     private static final String STOP_ACTION = "stopAction";
     private static final String TURN_RIGHT = "turnRight";
-    private static final String TURN_LEFT = "leftRight";
+    private static final String TURN_LEFT = "turnLeft";
 
     // callbacks
     private CallbackContext connectCallback;
@@ -253,6 +253,7 @@ public class BluetoothSerial extends CordovaPlugin {
 
             bluetoothSerialService.turnRight();
             callbackContext.success();
+            
         } else if (action.equals(TURN_LEFT)) {
 
             bluetoothSerialService.turnLeft();
