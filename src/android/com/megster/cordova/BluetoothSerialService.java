@@ -510,8 +510,8 @@ public class BluetoothSerialService {
                 motorCSpeed = 0;
             }
             try {
-                sendMessage(messageMotorLeft);
                 sendMessage(messageMotorRight);
+                sendMessage(messageMotorLeft);
             } catch (IOException e) {
                 Log.e(TAG, e.toString());   
             }
@@ -530,8 +530,8 @@ public class BluetoothSerialService {
                 motorBSpeed = 0;
             }
             try {
-                sendMessage(messageMotorRight);
                 sendMessage(messageMotorLeft);
+                sendMessage(messageMotorRight);
             } catch (IOException e) {
                 Log.e(TAG, e.toString());   
             }
@@ -597,16 +597,6 @@ public class BluetoothSerialService {
             }
         }
         
-        private void sendBTCmessage(int delay, int message, int value1, int value2) {
-            Bundle myBundle = new Bundle();
-            myBundle.putInt("message", message);
-            myBundle.putInt("value1", value1);
-            myBundle.putInt("value2", value2);
-            Message myMessage = mHandler.obtainMessage();
-            myMessage.setData(myBundle);
-            mHandler.sendMessage(myMessage);
-        }
-
         public void sendMessage(byte[] message) throws IOException {
             int messageLength = message.length;
             mmOutStream.write(messageLength);
