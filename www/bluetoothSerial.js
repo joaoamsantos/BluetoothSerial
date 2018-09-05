@@ -141,8 +141,11 @@ module.exports = {
     
     turnRight: function (success, failure) {
         cordova.exec(success, failure, "BluetoothSerial", "turnRight");
+    },
+    
+    moveBackward :function (success, failure) {
+        cordova.exec(success, failure, "BluetoothSerial", "moveBackward");
     }
-
 };
 
 var stringToArrayBuffer = function(str) {
