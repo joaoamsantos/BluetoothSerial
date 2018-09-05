@@ -218,10 +218,18 @@ public class BluetoothSerialService {
     
     /**
      *JMS
-     *Action that allows the user to turn right the robot
+     *Action that allows the user to turn left the robot
      */
     public void turnLeft() {
         mConnectedThread.turnLeftRobot();   
+    }
+    
+    /**
+     *JMS
+     *Action that allows the user to turn right the robot
+     */
+    public void moveBackward() {
+        mConnectedThread.moveBackwardRobot();   
     }
     
    /**
@@ -569,6 +577,26 @@ public class BluetoothSerialService {
             }
         }
 
+        public void moveBackwardRobot() {
+            byte[] messageMotorB;
+            byte[] messageMotorC;
+            if(motorCSpeed == -30 && motorBSpeed == -30){
+                return;    
+            }
+            else{
+                messageMotorB = EV3LCPMessage.getMotorMessage(31,-30);
+                messageMotorC = EV3LCPMessage.getMotorMessage(32,-30);
+                motorCSpeed = -30;
+                motorBSpeed = -30;
+            }
+            try {
+                sendMessage(messageMotorB);
+                sendMessage(messageMotorC);
+            } catch (IOException e) {
+                Log.e(TAG, e.toString());   
+            }
+        }
+        
         private void sendBTCmessage(int delay, int message, int value1, int value2) {
             Bundle myBundle = new Bundle();
             myBundle.putInt("message", message);
