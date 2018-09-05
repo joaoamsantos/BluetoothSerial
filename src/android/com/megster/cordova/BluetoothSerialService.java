@@ -499,19 +499,19 @@ public class BluetoothSerialService {
         
         public void turnLeftRobot() {
            byte[] messageMotorB;
-           byte[] messageMotorC;
-           if(motorCSpeed == 30 && motorBSpeed == 1) {
-                return;
-           }
-           else {
+            byte[] messageMotorC;
+            if(motorCSpeed == 30 && motorBSpeed == 30){
+                return;    
+            }
+            else{
+                messageMotorB = EV3LCPMessage.getMotorMessage(31,30);
                 messageMotorC = EV3LCPMessage.getMotorMessage(32,30);
-                messageMotorB = EV3LCPMessage.getMotorMessage(31,1);
                 motorCSpeed = 30;
-                motorBSpeed = 1;
-           } 
-           try {
-               sendMessage(messageMotorC);
+                motorBSpeed = 30;
+            }
+            try {
                 sendMessage(messageMotorB);
+                sendMessage(messageMotorC);
             } catch (IOException e) {
                 Log.e(TAG, e.toString());   
             }
@@ -519,17 +519,17 @@ public class BluetoothSerialService {
         
         public void turnRightRobot() {
            byte[] messageMotorB;
-           byte[] messageMotorC;
-           if(motorCSpeed == 1 && motorBSpeed == 30) {
-                return;
-           }
-           else {
+            byte[] messageMotorC;
+            if(motorCSpeed == 30 && motorBSpeed == 30){
+                return;    
+            }
+            else{
                 messageMotorB = EV3LCPMessage.getMotorMessage(31,30);
-                messageMotorC = EV3LCPMessage.getMotorMessage(32,1);
-                motorCSpeed = 1;
+                messageMotorC = EV3LCPMessage.getMotorMessage(32,30);
+                motorCSpeed = 30;
                 motorBSpeed = 30;
-           } 
-           try {
+            }
+            try {
                 sendMessage(messageMotorB);
                 sendMessage(messageMotorC);
             } catch (IOException e) {
