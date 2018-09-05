@@ -417,6 +417,8 @@ public class BluetoothSerialService {
         private final BluetoothSocket mmSocket;
         private final InputStream mmInStream;
         private final OutputStream mmOutStream;
+        private int motorCSpeed;
+        private int motorBSpeed;
 
         public ConnectedThread(BluetoothSocket socket, String socketType) {
             Log.d(TAG, "create ConnectedThread: " + socketType);
@@ -472,9 +474,16 @@ public class BluetoothSerialService {
          //ADDED BY JMS - Functions that create a byte array that allows the motors to start
         
         public void stopRobot() {
-           byte[] messageMotorB = EV3LCPMessage.getMotorMessage(31,0);
-           byte[] messageMotorC = EV3LCPMessage.getMotorMessage(32,0);
-            try {
+           if(motorCSpeed == 0 && motorBSpeed == 0) {
+                return;
+           }
+           else {
+                byte[] messageMotorB = EV3LCPMessage.getMotorMessage(31,0);
+                byte[] messageMotorC = EV3LCPMessage.getMotorMessage(32,0);
+                motorCSpeed = 0;
+                motorBSpeed = 0;
+           } 
+           try {
                 sendMessage(messageMotorB);
                 sendMessage(messageMotorC);
             } catch (IOException e) {
@@ -482,9 +491,16 @@ public class BluetoothSerialService {
             }
         }
         
-        public void MotorForward() {       
-            byte[] messageMotorB = EV3LCPMessage.getMotorMessage(31,30);
-            byte[] messageMotorC = EV3LCPMessage.getMotorMessage(32,30);
+        public void MotorForward() {
+            if(motorCSpeed == 30 && motorBSpeed == 30){
+                return;    
+            }
+            else{
+                byte[] messageMotorB = EV3LCPMessage.getMotorMessage(31,30);
+                byte[] messageMotorC = EV3LCPMessage.getMotorMessage(32,30);
+                motorCSpeed = 30;
+                motorBSpeed = 30;
+            }
             try {
                 sendMessage(messageMotorB);
                 sendMessage(messageMotorC);
