@@ -510,7 +510,6 @@ public class BluetoothSerialService {
         public void turnRightRobot() {
             byte[] messageMotorRight;
             messageMotorRight = EV3LCPMessage.getMotorMessage(32,30);
-            }
             try {
                 sendMessage(messageMotorRight);
             } catch (IOException e) {
