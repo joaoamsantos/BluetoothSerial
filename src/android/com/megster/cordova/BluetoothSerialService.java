@@ -202,12 +202,28 @@ public class BluetoothSerialService {
     
     /**
      *JMS
-     *Action that allows the user to stop an action 
+     *Action that allows the user to stop the motors of movement 
      */
     public void stopAction() {
         mConnectedThread.stopRobot();   
     }
 
+     /**
+     *JMS
+     *Action that allows the user to turn right the robot
+     */
+    public void turnRight() {
+        mConnectedThread.turnRightRobot();   
+    }
+    
+    /**
+     *JMS
+     *Action that allows the user to turn right the robot
+     */
+    public void turnLeft() {
+        mConnectedThread.turnLeftRobot();   
+    }
+    
    /**
      * Indicate that the connection attempt failed and notify the UI Activity.
      */
@@ -473,6 +489,38 @@ public class BluetoothSerialService {
 
          //ADDED BY JMS - Functions that create a byte array that allows the motors to start
         
+        public void turnLeftRobot() {
+           byte[] messageMotorB;
+           if(motorBSpeed == 30){
+                return;    
+            }
+            else{
+                messageMotorB = EV3LCPMessage.getMotorMessage(31,30);
+                motorBSpeed = 30;
+            }
+            try {
+                sendMessage(messageMotorB);
+            } catch (IOException e) {
+                Log.e(TAG, e.toString());   
+            }
+        }
+        
+        public void turnRightRobot() {
+            byte[] messageMotorC;
+             if(motorCSpeed == 30){
+                return;    
+            }
+            else{
+                messageMotorC = EV3LCPMessage.getMotorMessage(32,30);
+                motorCSpeed = 30;
+            }
+            try {
+                sendMessage(messageMotorC);
+            } catch (IOException e) {
+                Log.e(TAG, e.toString());   
+            }
+        }
+                
         public void stopRobot() {
            byte[] messageMotorB;
            byte[] messageMotorC;
