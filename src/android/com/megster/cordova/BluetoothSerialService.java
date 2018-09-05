@@ -544,7 +544,7 @@ public class BluetoothSerialService {
             }
         }
                 
-        public void stopRobot(code) {
+        public void stopRobot(String code) {
            int codeInteger = Integer.parseInt(code);
            byte[] message = EV3LCPMessage.getMotorMessage(codeInteger,0);
             try {
