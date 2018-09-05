@@ -491,12 +491,15 @@ public class BluetoothSerialService {
         
         public void turnLeftRobot() {
            byte[] messageMotorLeft;
-           if(motorBSpeed == 30){
+           byte[] messageMotorRight;
+           if(motorBSpeed == 30 && motorCSpeed == 0){
                 return;    
             }
             else{
                 messageMotorLeft = EV3LCPMessage.getMotorMessage(31,30);
+                messageMotorRight = EV3LCPMessage.getMotorMessage(32,0);
                 motorBSpeed = 30;
+                motorCSpeed = 0;
             }
             try {
                 sendMessage(messageMotorLeft);
@@ -507,12 +510,15 @@ public class BluetoothSerialService {
         
         public void turnRightRobot() {
             byte[] messageMotorRight;
-             if(motorCSpeed == 30){
+            byte[] messageMotorLeft;
+             if(motorCSpeed == 30 && motorBSpeed == 0){
                 return;    
             }
             else{
                 messageMotorRight = EV3LCPMessage.getMotorMessage(32,30);
+                messageMotorLeft = EV3LCPMessage.getMotorMessage(31,0);
                 motorCSpeed = 30;
+                motorBSpeed = 0;
             }
             try {
                 sendMessage(messageMotorRight);
