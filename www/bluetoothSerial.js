@@ -133,8 +133,15 @@ module.exports = {
      
     stopAction: function (success, failure) {
         cordova.exec(success, failure, "BluetoothSerial", "stopAction");
+    },
+    
+    turnLeft: function (success, failure) {
+        cordova.exec(success, failure, "BluetoothSerial", "turnLeft");
+    },
+    
+    turnRight: function (success, failure) {
+        cordova.exec(success, failure, "BluetoothSerial", "turnRight");
     }
-
 
 };
 
