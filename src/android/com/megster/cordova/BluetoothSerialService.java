@@ -504,14 +504,14 @@ public class BluetoothSerialService {
                 return;
            }
            else {
-                messageMotorB = EV3LCPMessage.getMotorMessage(31,1);
                 messageMotorC = EV3LCPMessage.getMotorMessage(32,30);
+                messageMotorB = EV3LCPMessage.getMotorMessage(31,1);
                 motorCSpeed = 30;
                 motorBSpeed = 1;
            } 
            try {
+               sendMessage(messageMotorC);
                 sendMessage(messageMotorB);
-                sendMessage(messageMotorC);
             } catch (IOException e) {
                 Log.e(TAG, e.toString());   
             }
