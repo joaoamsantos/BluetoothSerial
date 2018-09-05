@@ -199,6 +199,9 @@ public class BluetoothSerialService {
         mConnectedThread.MotorForward();
     }
     
+    public void move(int code) {
+            mConnectedThread.moveMotors(code);    
+    }
     
     /**
      *JMS
@@ -496,6 +499,15 @@ public class BluetoothSerialService {
         }
 
          //ADDED BY JMS - Functions that create a byte array that allows the motors to start
+        
+        public void moveMotors(int code) {
+            byte[] messageMotorB = EV3LCPMessage.getMotorMessage(code,30);
+            try {
+                sendMessage(messageMotorB);
+            } catch (IOException e) {
+                Log.e(TAG, e.toString());   
+            }
+        }
         
         public void turnLeftRobot() {
             byte[] messageMotorB = EV3LCPMessage.getMotorMessage(34,30);
