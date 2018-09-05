@@ -57,7 +57,7 @@ public class BluetoothSerial extends CordovaPlugin {
     private static final String TURN_RIGHT = "turnRight";
     private static final String TURN_LEFT = "turnLeft";
     private static final String MOVE_BACKWARD = "moveBackward";
-    private static final String MOVE = "move";
+    private static final String MOVE_FORWARD = "moveForward";
     
     // callbacks
     private CallbackContext connectCallback;
@@ -253,24 +253,27 @@ public class BluetoothSerial extends CordovaPlugin {
 
         } else if (action.equals(TURN_RIGHT)) {
 
-            bluetoothSerialService.turnRight();
+            String speed = args.getString(0);
+            bluetoothSerialService.turnRight(speed);
             callbackContext.success();
             
         } else if (action.equals(TURN_LEFT)) {
 
-            bluetoothSerialService.turnLeft();
+            String speed = args.getString(0);
+            bluetoothSerialService.turnLeft(speed);
             callbackContext.success();
             
         } else if (action.equals(MOVE_BACKWARD)) {
-
-            bluetoothSerialService.moveBackward();
+            
+            String speed = args.getString(0);
+            bluetoothSerialService.moveBackward(speed);
             callbackContext.success();
         }
         
-        else if (action.equals(MOVE)) {
+        else if (action.equals(MOVE_FORWARD)) {
             
-            String code = args.getString(0);
-            bluetoothSerialService.move(code);
+            String speed = args.getString(0);
+            bluetoothSerialService.moveForward(speed);
             callbackContext.success();
         }
     
