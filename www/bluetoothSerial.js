@@ -149,6 +149,14 @@ module.exports = {
     
     moveForward :function (speed,success, failure) {
         cordova.exec(success, failure, "BluetoothSerial", "moveForward", [speed]);
+    },
+    
+    shootGun :function (speed,success, failure) {
+        cordova.exec(success, failure, "BluetoothSerial", "shootGun", [speed]);
+    },
+    
+    stopGun :function (success, failure) {
+        cordova.exec(success, failure, "BluetoothSerial", "stopGun");
     }
 };
 
