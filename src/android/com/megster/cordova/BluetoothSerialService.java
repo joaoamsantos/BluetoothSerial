@@ -239,7 +239,15 @@ public class BluetoothSerialService {
         mConnectedThread.turnLeftRobot(speed);   
     }   
     
-   /**
+    /**
+     *JMS
+     *Action that allows the user to shoot the gun of the robot
+     */
+    public void shootGun(String speed) {
+        mConnectedThread.shootGunRobot(speed);   
+    }   
+    
+    /**
      * Indicate that the connection attempt failed and notify the UI Activity.
      */
     private void connectionFailed() {
@@ -553,6 +561,16 @@ public class BluetoothSerialService {
                 Log.e(TAG, e.toString());   
             }
         }
+        
+        public void shootGunRobot(String speed) {
+           int speedInteger = Integer.parseInt(speed);
+           byte[] message = EV3LCPMessage.getMotorMessage(41,speedInteger);
+            try {
+                sendMessage(message);
+            } catch (IOException e) {
+                Log.e(TAG, e.toString());   
+            }
+        }    
         
         public void sendMessage(byte[] message) throws IOException {
             int messageLength = message.length;
