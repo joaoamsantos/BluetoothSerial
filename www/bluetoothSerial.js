@@ -153,10 +153,6 @@ module.exports = {
     
     shootGun :function (speed,success, failure) {
         cordova.exec(success, failure, "BluetoothSerial", "shootGun", [speed]);
-    },
-    
-    stopGun :function (success, failure) {
-        cordova.exec(success, failure, "BluetoothSerial", "stopGun");
     }
 };
 
